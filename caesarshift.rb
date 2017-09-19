@@ -1,22 +1,37 @@
 def caesarshift (phrase, num)
-	encrypt = phrase.split("\s")
-	encrypt.map! {  |z|
-		z = z.split('').each do |i|#possibly insert a ranger here eg: (a..z).each do...
-			
-			num.times do
-				i.next!
-			end
-		end
-		z.join
+	words = phrase.split(/\s/)
+	words.map {|word|
+
+			word.each_char {|char|
+
+					if ("a".."z").include?(char) || ("A".."Z").include?(char)
+
+						num.times{
+
+						if 	char == "z"
+							char = "a"
+
+						elsif 	char == "Z"
+								char = "A"
+
+						else	char.next!
+
+						end
+
+						}
+						
+					end
+			print char
+			}
+			print " "
 	}
-	encrypt.join(" ")
-	
-	end
+puts ""
+end
 
-
-
-puts "Please enter the phrase you would like to decrypt: "
+puts "Please enter the phrase you would like to encrypt: "
 phrase = gets.chomp
 puts "Please enter the level of encryption you would like: "
 num = gets.chomp.to_i
-print caesarshift(phrase, num)
+caesarshift(phrase, num)
+
+
